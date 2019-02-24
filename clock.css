@@ -11,12 +11,16 @@
 
 .clock-box { 
     font-size: 36px;
+    margin: auto;
+    align:center;
+    background-color: yellow;
+    width:300px;
 }
 
 .container {
     margin:auto;
     align: center;
-    width:200px;
+    width:500px;
     background-color: red;
     border: 2px solid coral;
 }
@@ -24,4 +28,16 @@
 .extended {
     background-color: grey;
     border: 3px solid black;
+    margin-top: 50px;
+    align:center;
+    width:300px;
+}
+
+.btn {
+    background-color: blue;
+    color:white;
+}
+
+.btn-selected {
+    background-color: darkblue;
 }
