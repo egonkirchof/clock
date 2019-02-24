@@ -21,6 +21,19 @@ function updateClock() {
     
 }
 
+function getTimeFromServer(location="Barcelona") {
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const key = "QXWT4SV4e8GRsfiUH5dMB9k8gPjnhv"
+    const request = proxyurl+`https://www.amdoren.com/api/timezone.php?api_key=${key}&loc=${location}`
+    console.log("Getting time from time server...");
+    console.log(request);
+    fetch(request)
+      .then( res => res.json())
+      .then( data => {
+        console.log(data);
+    })
+      .catch( err => console.log("Error: " , err));
+}
 function init() {
     console.log("Init...");
     hourId = document.getElementById("hour");
