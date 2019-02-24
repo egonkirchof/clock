@@ -1,0 +1,22 @@
+.clock-display {
+    background-color: blue;
+    width:80px;
+    display:inline;
+}
+
+.colon {
+    width:30px;
+    display:inline;
+}
+
+.clock-box { 
+    font-size: 36px;
+}
+
+.container {
+    margin:auto;
+    align: center;
+    width:200px;
+    background-color: red;
+    border: 2px solid coral;
+}
