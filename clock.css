@@ -1,20 +1,25 @@
+.clock-container {
+    margin:auto;
+    background-color: aqua;
+    width:200px;
+}
+
 .clock-display {
     background-color: blue;
-    width:80px;
     display:inline;
 }
 
 .colon {
-    width:30px;
     display:inline;
 }
 
 .clock-box { 
     font-size: 36px;
-    margin: auto;
     align:center;
     background-color: yellow;
-    width:300px;
+    width:300px;    
+    margin: auto;
+    margin-top:20px;
 }
 
 .container {
@@ -28,16 +33,21 @@
 .extended {
     background-color: grey;
     border: 3px solid black;
+    margin: auto;
     margin-top: 50px;
     align:center;
     width:300px;
 }
 
 .btn {
-    background-color: blue;
+    background-color: darkblue;
+    align:center;
+    padding:5px;
     color:white;
+    margin: auto;
+    width:80%;
 }
 
-.btn-selected {
+.selected {
     background-color: darkblue;
 }

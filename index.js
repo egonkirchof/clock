@@ -2,7 +2,6 @@
 
 "use strict";
 
-var timer, hourId, minuteId, secondId;
 
 function formatNice(number,minimunLength=2) {
     let s = number.toString();
@@ -33,7 +32,7 @@ function updateRemote() {
         let h,m;
         //console.log(data);
         const now = data.currentDateTime.split("T")[1].split("+")[0]; // "2019-02-24T20:32+01:00"
-        //console.log(now);
+        console.log("From server:",now);
         [h,m] = now.split(":");
         hourId.innerHTML = formatNice(h,1);
         minuteId.innerHTML = formatNice(m);
@@ -45,29 +44,44 @@ function updateRemote() {
     }
 
 function getTimeFromServer(location="cet") {  
-    console("Getting time from server...");
+    console.log("Getting time from server...");
     timeZone = location
     if(timer) clearInterval(timer);
+    setChecker(false);
     updateRemote();
     timer = setInterval( updateRemote, 60*1000);
 }
 
 function getTimeFromComputer() {
     if(timer) clearInterval(timer);
+    setChecker(true);
     timer = setInterval( updateClock, 1000);       
 }
 
-var timeZone,timer;
-
-function startTimer(interval=1000) {
+function setChecker(fromComputer) {
+    checkComputer.style = `display:${fromComputer?"inline":"none"}`;
+    checkServer.style = `display:${!fromComputer?"inline":"none"}`;
     
 }
+
+function setAlarm() {
+    console.log("Alarm:",alarmCheckBox )
+}
+
+var timeZone,timer;
+var timer, hourId, minuteId, secondId;
+var checkComputer,checkServer;
+var alarmCheckBox;
 
 function init() {
     console.log("Init...");
     hourId = document.getElementById("hour");
     minuteId = document.getElementById("minute");
     secondId = document.getElementById("second");
+    checkComputer = document.getElementById("checkComputer");
+    checkServer = document.getElementById("checkServer");    
+    alarmCheckBox = document.getElementById("alarmCheckBox");
+    
     if(!(hourId && minuteId && secondId)) {
         console.log("Clock elements not found.");
         return;

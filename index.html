@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
       <link type="text/css" rel="stylesheet" href="clock.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     
     <meta name="viewport" content="width=device-width">
   
@@ -13,22 +14,30 @@
         <div class="container">
             
             <div id="clock" class="clock-box">
-                <div class="clock-display" id="hour">00</div>
-                <div class="colon">:</div>
-                <div class="clock-display" id="minute">00</div>
-                <div class="colon">:</div>
-                <div class="clock-display" id="second">00</div>
+                <div class="clock-container">
+                    <div class="clock-display" id="hour">00</div>
+                    <div class="colon">:</div>
+                    <div class="clock-display" id="minute">00</div>
+                    <div class="colon">:</div>
+                    <div class="clock-display" id="second">00</div>
+                </div>
+                
             </div>
             
             <div class="extended">
                 <!-- select name="locations" id="locs" disabled></select><br-->
                 <button class="btn" onclick="getTimeFromServer()">Get time from time server</button>
+                <i class="fas fa-check" id="checkServer"></i>
                 <br>
-                <button class="btn btn-selected" onclick="getTimeFromComputer()">Get time from computer</button>
-            
+                <button class="btn" onclick="getTimeFromComputer()">Get time from computer</button>     <i class="fas fa-check" id="checkComputer"></i>
+                <br>
+                <label class="lbl">Alarm:</label>
+                <input type="text" id="alarm" placeholder="hh:mm:ss or hh:mm">
+                <input type="checkbox" onchange="setAlarm()" id="alarmCheckBox">
             </div> 
+        </div>
         <br><br><br>    
-        Powered by <a href="https://www.amdoren.com">Amdoren</a>
+    
         <script src="index.js"></script>
     </body>
 </html>
