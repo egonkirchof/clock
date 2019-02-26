@@ -14,9 +14,11 @@ function formatNice(number,minimunLength=2) {
 function updateClock() {
     // console.log(now);        
     const now = new Date();
+
     hourId.innerHTML = formatNice(now.getHours(),1);
     minuteId.innerHTML = formatNice(now.getMinutes());
-    secondId.innerHTML = formatNice(now.getSeconds());       
+    secondId.innerHTML = formatNice(now.getSeconds()); 
+    checkAlarm();      
 }
 
 function updateRemote() {        
@@ -36,7 +38,8 @@ function updateRemote() {
         [h,m] = now.split(":");
         hourId.innerHTML = formatNice(h,1);
         minuteId.innerHTML = formatNice(m);
-        secondId.innerHTML = "00";     
+        secondId.innerHTML = "00";    
+        checkAlarm(true); 
 
     })
       .catch( err => console.log("Error: " , err));
@@ -65,21 +68,48 @@ function setChecker(fromComputer) {
 }
 
 function setAlarm() {
-    console.log("Alarm:",alarmCheckBox )
+    if(!alarmCheckBox.checked) {
+        alarm=false; // turn off alarm if buzzing
+        if(buzzer) clearTimeout(buzzer);
+        audio.pause();
+    }
+} 
+
+function buzz() {
+    console.log("Alarm!");
+    audio.play();          
+    buzzer = setTimeout(buzz,14000);
+}
+
+function checkAlarm(ignoreSeconds=false) { 
+    let h,m,s;  
+    if(alarm || !alarmCheckBox.checked) return;
+    [h,m,s] = alarmTime.value.split(":");
+  //  console.log("checking alarm...",h,m,s);
+    if(h != hourId.innerHTML || m != minuteId.innerHTML) return;
+    
+    alarm = ignoreSeconds || !s || s==secondId.innerHTML;
+    if(alarm) {
+        console.log("starting alarm...");  
+        buzz();
+    }
 }
 
 var timeZone,timer;
 var timer, hourId, minuteId, secondId;
 var checkComputer,checkServer;
-var alarmCheckBox;
+var buzzer,alarmTime,alarmCheckBox,alarm=false;
+var audio = new Audio('alarm.mp3');
 
 function init() {
     console.log("Init...");
+    alarm=false;
     hourId = document.getElementById("hour");
     minuteId = document.getElementById("minute");
     secondId = document.getElementById("second");
     checkComputer = document.getElementById("checkComputer");
     checkServer = document.getElementById("checkServer");    
+    alarmTime = document.getElementById("alarm");
     alarmCheckBox = document.getElementById("alarmCheckBox");
     
     if(!(hourId && minuteId && secondId)) {
